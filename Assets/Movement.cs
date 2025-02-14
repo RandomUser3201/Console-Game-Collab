@@ -1,0 +1,102 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class Movement : MonoBehaviour
+{
+    // [Movement and Camera]
+    public float speed = 5f;
+    public Transform cameraTransform;
+    public float mouseSensitivity = 200f;
+    public float distanceFromPlayer = 5f;
+    private float rotationX = 0f;
+    private float rotationY = 0f;
+    public Rigidbody rb;
+
+
+    void Start()
+    {
+        // Lock cursor for better control
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
+        rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody component is missing on the Player.");
+        }
+
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main.transform;
+            if (cameraTransform == null)
+            {
+                Debug.LogError("No camera assigned, and no Main Camera found in the scene!");
+            }
+        }
+    }
+
+    void Update()
+    {
+        // Handle mouse input
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        //Debug.Log($"MouseX: {mouseX}, MouseY: {mouseY}");
+
+        // Update rotation values
+        rotationY += mouseX;
+        rotationX -= mouseY;
+
+        // Clamped vertical rotation to prevent flipping
+        rotationX = Mathf.Clamp(rotationX, -35f, 60f);
+
+        // Apply rotation to the camera
+        cameraTransform.rotation = Quaternion.Euler(rotationX, rotationY, 0f);
+
+        // Updated the camera position relative to the player
+        cameraTransform.position = transform.position - cameraTransform.forward * distanceFromPlayer + Vector3.up * 1.5f;
+
+    }
+
+    void FixedUpdate()
+    {
+        // Get input from WASD or arrow keys
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        if (horizontal == 0f && vertical == 0f)
+            return;
+
+        // Get the forward and right directions from the camera
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 cameraRight = cameraTransform.right;
+
+        // Flatten directions on the horizontal plane
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Calculate movement direction
+        Vector3 movement = (cameraForward * vertical + cameraRight * horizontal).normalized;
+
+        // Move the player
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+
+        // Rotate the player to face the movement direction
+        if (movement.magnitude > 0)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
+            rb.rotation = Quaternion.Slerp(rb.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+        }
+
+        // Debug movement direction
+        Debug.DrawRay(transform.position, movement * 5f, Color.green);
+    }
+
+}
