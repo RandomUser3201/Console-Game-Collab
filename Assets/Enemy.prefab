@@ -151,6 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   agent: {fileID: 2472108238515780191}
+  health: 100
+  maxHealth: 100
+  healthText: {fileID: 0}
+  healthDisplayPrefab: {fileID: 5719874447612883045, guid: f7143cdc3378cdf40a2426cb681b863d, type: 3}
 --- !u!195 &2472108238515780191
 NavMeshAgent:
   m_ObjectHideFlags: 0
