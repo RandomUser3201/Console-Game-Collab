@@ -39,13 +39,23 @@ public class EnemyBehaviour : MonoBehaviour
 
         healthText.text = Mathf.RoundToInt(health).ToString();
         transform.LookAt(Camera.main.transform); 
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            TakeDamage(25f);
+        }
     }
+
 
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health == 0)
+        Debug.Log("Enemy took damage: " + damage + " Current Health: " + health);
+
+        if (health <= 0)
         {
+            health = 0;
+            healthText.text = "0";            
             Debug.LogWarning("Health is now 0: " + health);
         }
     }

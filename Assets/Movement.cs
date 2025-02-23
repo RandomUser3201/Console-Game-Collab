@@ -15,6 +15,9 @@ public class Movement : MonoBehaviour
     private float rotationY = 0f;
     public Rigidbody rb;
 
+    public float dashSpeed;
+    public float dashTime;
+
 
     void Start()
     {
@@ -60,6 +63,11 @@ public class Movement : MonoBehaviour
         // Updated the camera position relative to the player
         cameraTransform.position = transform.position - cameraTransform.forward * distanceFromPlayer + Vector3.up * 1.5f;
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("dash");
+            StartCoroutine(Dash());
+        }
     }
 
     void FixedUpdate()
@@ -99,4 +107,16 @@ public class Movement : MonoBehaviour
         Debug.DrawRay(transform.position, movement * 5f, Color.green);
     }
 
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dashTime)
+        {
+            transform.Translate(Vector3.forward * dashSpeed);
+            yield return null;
+        }
+    }
 }
+
+// Unity 2020 Tutorial: SIMPLE Dashing in 3D [w/ 'Character Controller' Component] https://www.youtube.com/watch?v=vTNWUbGkZ58
