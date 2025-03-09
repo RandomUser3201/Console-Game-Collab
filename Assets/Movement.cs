@@ -14,6 +14,7 @@ public class Movement : MonoBehaviour
     private float rotationX = 0f;
     private float rotationY = 0f;
     public Rigidbody rb;
+    public TrailRenderer tr;
 
     public float dashSpeed;
     public float dashTime;
@@ -25,6 +26,11 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        tr = GetComponent<TrailRenderer>();
+        if (tr == null)
+        {
+            Debug.LogError("TrailRenderer component missing on the Player");
+        }
 
         rb = GetComponent<Rigidbody>();
         if (rb == null)
@@ -67,6 +73,7 @@ public class Movement : MonoBehaviour
         {
             Debug.Log("dash");
             StartCoroutine(Dash());
+            tr.time = 0.3f;
         }
     }
 
@@ -110,11 +117,23 @@ public class Movement : MonoBehaviour
     IEnumerator Dash()
     {
         float startTime = Time.time;
-
         while(Time.time < startTime + dashTime)
         {
             transform.Translate(Vector3.forward * dashSpeed);
             yield return null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.CompareTag("PSpeed"))
+        {
+            Debug.LogWarning("Collided with Speed Powerup - movement.cs");
+        }
+        if (other.gameObject.tag == "PDash")
+        {
+            Debug.LogWarning("Collided with Dash Powerup");
         }
     }
 }

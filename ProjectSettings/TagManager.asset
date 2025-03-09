@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cube
+  - PSpeed
+  - PDash
   layers:
   - Default
   - TransparentFX
