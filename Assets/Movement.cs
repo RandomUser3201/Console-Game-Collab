@@ -6,16 +6,23 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-    // [Movement and Camera]
-    public float speed = 5f;
+
+    //[Camera Controls]
     public Transform cameraTransform;
     public float mouseSensitivity = 200f;
     public float distanceFromPlayer = 5f;
     private float rotationX = 0f;
     private float rotationY = 0f;
+
     public Rigidbody rb;
     public TrailRenderer tr;
 
+    public float speed = 5f;
+    public float speedTimer = 0;
+    private bool activateSpeed = false;
+
+    private bool activateDash = false;
+    private int dashPoint;
     public float dashSpeed;
     public float dashTime;
 
@@ -69,11 +76,41 @@ public class Movement : MonoBehaviour
         // Updated the camera position relative to the player
         cameraTransform.position = transform.position - cameraTransform.forward * distanceFromPlayer + Vector3.up * 1.5f;
 
+
+        if (dashPoint > 0)
+        {
+            Debug.LogWarning("Dash Activated");
+            activateDash = true;
+        }
+        else 
+        {
+            Debug.LogWarning("Dash Deactivated");
+            activateDash = false;
+        }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("dash");
-            StartCoroutine(Dash());
-            tr.time = 0.3f;
+            if (activateDash)
+            {
+                Debug.Log("dash");
+                StartCoroutine(Dash());
+                tr.time = 0.3f;
+                dashPoint--;
+            }
+        }
+
+        if (activateSpeed)
+        {
+            if (speedTimer > 0)
+            {
+                speedTimer -= Time.deltaTime;
+            }
+            else
+            {
+                speed = 10f;
+                activateSpeed = false;
+                Debug.Log("Speed Deactivated");
+            }
         }
     }
 
@@ -129,11 +166,21 @@ public class Movement : MonoBehaviour
         
         if (other.CompareTag("PSpeed"))
         {
-            Debug.LogWarning("Collided with Speed Powerup - movement.cs");
+            Debug.LogWarning("Collided with Speed Powerup");    
+            speedTimer = 5;
+            speed = 100f;
+            activateSpeed = true;
+            
+            Destroy(other.gameObject);
         }
+
         if (other.gameObject.tag == "PDash")
         {
+            dashPoint += 1;
+            Debug.LogWarning("Dash Point: " + dashPoint);
             Debug.LogWarning("Collided with Dash Powerup");
+
+            Destroy(other.gameObject);
         }
     }
 }
