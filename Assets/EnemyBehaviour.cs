@@ -28,7 +28,6 @@ public class EnemyBehaviour : MonoBehaviour
         healthDisplay = Instantiate(healthDisplayPrefab, transform);
         healthDisplay.transform.localPosition = new Vector3(0, 2, 0);
 
-
         healthText = healthDisplay.GetComponentInChildren<Text>(); 
     }
 
