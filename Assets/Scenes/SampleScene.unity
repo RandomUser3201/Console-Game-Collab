@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1613,14 +1614,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.047169685, b: 0.047169685, a: 0.5568628}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 82381703776f87947a1645e3a3eeeb95, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2451,7 +2452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ec24647bb0bbf419a3b6e5ee212c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPUPrefab: {fileID: 8771046402737967579, guid: 32c2927d72d28854ab2f4c57cc57d0d8, type: 3}
+  speedPUPrefab: {fileID: 8110600952376273057, guid: 054953e2eae40404b83ce8c65f5fcdc3, type: 3}
   dashPUPrefab: {fileID: 8771046402737967579, guid: ef5f1e40493d5ee409d0614aa874e776, type: 3}
   minX: 27.9
   maxX: -27
@@ -2838,6 +2839,7 @@ MonoBehaviour:
   debugTransform: {fileID: 282422981}
   bulletPrefab: {fileID: 3544738176696691210, guid: 9185448e4b672eb4c9be640b6c8297c6, type: 3}
   spawnBulletPosition: {fileID: 1693210967}
+  crosshair: {fileID: 592077289}
 --- !u!1 &1033628999
 GameObject:
   m_ObjectHideFlags: 0

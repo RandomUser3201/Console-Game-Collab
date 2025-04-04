@@ -13,8 +13,7 @@ public class THPShooterController : MonoBehaviour
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform bulletPrefab;
     [SerializeField] private Transform spawnBulletPosition;
-
-
+    public GameObject crosshair;
     
     private Animator animator;
     private ThirdPersonController thirdPersonController;
@@ -27,6 +26,7 @@ public class THPShooterController : MonoBehaviour
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsinput = GetComponent<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
+        crosshair.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,6 +50,7 @@ public class THPShooterController : MonoBehaviour
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);         
             thirdPersonController.SetRotationOnMove(false);   
+            crosshair.SetActive(true);
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -63,13 +64,17 @@ public class THPShooterController : MonoBehaviour
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotationOnMove(true);
             animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10));
+            crosshair.SetActive(false);
         }
 
         if (starterAssetsinput.shoot)
         {
-            Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
-            Instantiate(bulletPrefab, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
-            starterAssetsinput.shoot = false;
+            if (starterAssetsinput.aim)
+            {
+                Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
+                Instantiate(bulletPrefab, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                starterAssetsinput.shoot = false;
+            }
         }
 
     }
