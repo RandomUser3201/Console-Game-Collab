@@ -21,6 +21,16 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyBehaviour enemy = other.GetComponent<EnemyBehaviour>();
+            
+            if (enemy != null)
+            {
+                enemy.TakeDamage(25f);
+            }
+        }
+
         Destroy(gameObject);    
     }
 }

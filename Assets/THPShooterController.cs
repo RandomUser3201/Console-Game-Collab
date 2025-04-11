@@ -14,6 +14,7 @@ public class THPShooterController : MonoBehaviour
     [SerializeField] private Transform bulletPrefab;
     [SerializeField] private Transform spawnBulletPosition;
     public GameObject crosshair;
+    public GameObject aimSphere;
     
     private Animator animator;
     private ThirdPersonController thirdPersonController;
@@ -27,6 +28,7 @@ public class THPShooterController : MonoBehaviour
         starterAssetsinput = GetComponent<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
         crosshair.SetActive(false);
+        aimSphere.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,6 +53,7 @@ public class THPShooterController : MonoBehaviour
             thirdPersonController.SetSensitivity(aimSensitivity);         
             thirdPersonController.SetRotationOnMove(false);   
             crosshair.SetActive(true);
+            //aimSphere.SetActive(true);
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
@@ -65,6 +68,7 @@ public class THPShooterController : MonoBehaviour
             thirdPersonController.SetRotationOnMove(true);
             animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10));
             crosshair.SetActive(false);
+            //aimSphere.SetActive(false);
         }
 
         if (starterAssetsinput.shoot)

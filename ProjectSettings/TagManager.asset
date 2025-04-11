@@ -8,6 +8,7 @@ TagManager:
   - PSpeed
   - PDash
   - CinemachineTarget
+  - Enemy
   layers:
   - Default
   - TransparentFX

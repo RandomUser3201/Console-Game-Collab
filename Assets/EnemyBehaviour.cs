@@ -42,6 +42,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             TakeDamage(25f);
+            Debug.LogWarning("Enemy Q Damage");
         }
     }
 
@@ -56,6 +57,7 @@ public class EnemyBehaviour : MonoBehaviour
             health = 0;
             healthText.text = "0";            
             Debug.LogWarning("Health is now 0: " + health);
+            Destroy(gameObject);
         }
     }
 
