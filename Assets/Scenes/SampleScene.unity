@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3145,7 +3146,7 @@ MonoBehaviour:
   aimSensitivity: 0.7
   aimColliderLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 9
   debugTransform: {fileID: 282422981}
   bulletPrefab: {fileID: 3544738176696691210, guid: 9185448e4b672eb4c9be640b6c8297c6, type: 3}
   spawnBulletPosition: {fileID: 1693210967}

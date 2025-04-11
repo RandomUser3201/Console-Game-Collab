@@ -28,7 +28,7 @@ public class THPShooterController : MonoBehaviour
         starterAssetsinput = GetComponent<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
         crosshair.SetActive(false);
-        aimSphere.SetActive(false);
+        //aimSphere.SetActive(false);
     }
 
     // Update is called once per frame
