@@ -9,6 +9,7 @@ TagManager:
   - PDash
   - CinemachineTarget
   - Enemy
+  - AvoidObject
   layers:
   - Default
   - TransparentFX

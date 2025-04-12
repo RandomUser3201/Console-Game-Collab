@@ -32,11 +32,11 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        if (enemiesSpawned == 10)
-        {
-            Debug.LogWarning("Enemy Limit REACHED!!!: " + enemiesSpawned);
-            return;
-        }
+        // if (enemiesSpawned == 10)
+        // {
+        //     Debug.LogWarning("Enemy Limit REACHED!!!: " + enemiesSpawned);
+        //     return;
+        // }
 
         float randomX = Random.Range(minX, maxX);
         float randomZ = Random.Range(minZ, maxZ);
