@@ -16,13 +16,13 @@ public class EnemyBehaviour : MonoBehaviour
     private Text healthText;
     public GameObject healthDisplayPrefab;
     private GameObject healthDisplay;
-
-
+    private GUIManager gui;
+    public int killCount;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-
+        gui = FindObjectOfType<GUIManager>();
         agent = GetComponent<NavMeshAgent>();
 
         healthDisplay = Instantiate(healthDisplayPrefab, transform);
@@ -57,6 +57,8 @@ public class EnemyBehaviour : MonoBehaviour
             health = 0;
             healthText.text = "0";            
             Debug.LogWarning("Health is now 0: " + health);
+
+            gui.AddKill();
             Destroy(gameObject);
         }
     }

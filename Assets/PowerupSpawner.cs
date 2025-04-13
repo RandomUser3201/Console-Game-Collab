@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UI;
 
 public class PowerupSpawner : MonoBehaviour
 {
     public GameObject speedPUPrefab, dashPUPrefab;
     private int speedCount, dashCount;
-    
+      
 
     [SerializeField] private float minX = 2, maxX = 6;
     [SerializeField] private float minZ = 2, maxZ = 6;
@@ -62,4 +63,5 @@ public class PowerupSpawner : MonoBehaviour
         Debug.LogWarning("Dash Limit: " + dashCount);
     }
 
+    
 }
